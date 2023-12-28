@@ -1,0 +1,73 @@
+.mainText {
+  z-index: 5;
+  font-size: 52px;
+  font-family: "Nunito";
+  color: rgba(24, 7, 61);
+  font-weight: 600;
+}
+.mainHome {
+  display: flex;
+  width: 80%;
+  margin: auto;
+  justify-content: space-around;
+}
+
+.image {
+  height: 350px;
+}
+.btn {
+  padding: 15px 30px;
+  background-color: #33e2a0;
+  color: #ffffff;
+  border-radius: 40px;
+}
+.btn:hover {
+  background-color: #1b0e3d;
+}
+
+@media screen and (max-width: 768px) {
+  .mainText {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 18px;
+  }
+
+  .btn {
+    padding: 12px 24px;
+  }
+  .mainHome {
+    flex-direction: column;
+  }
+}
+
+/* Media query for mobile devices */
+@media screen and (max-width: 480px) {
+  .mainText {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+  }
+  .mainHome {
+    flex-direction: column;
+  }
+  .flex_box_right {
+    width: 80%;
+    margin: auto;
+
+    margin-top: 20px;
+    margin-right: 90px;
+  }
+  .image {
+    height: 300px;
+  }
+}
+
+/* Rest of your CSS styles */
