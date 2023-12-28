@@ -32,7 +32,7 @@ export default function Signup() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  const toast = useToast();
   const handleClick = async (e) => {
     let obj = {
       name,
@@ -41,6 +41,18 @@ export default function Signup() {
       phone,
       password,
     };
+    try {
+      let res = await axios.post(`${process.env.REACT_API}/register`, obj);
+      toast({
+        title: "Signup Successfull",
+
+        status: "success",
+        duration: 9000,
+        isClosable: true,
+      });
+    } catch (err) {
+      console.log("err");
+    }
   };
 
   return (

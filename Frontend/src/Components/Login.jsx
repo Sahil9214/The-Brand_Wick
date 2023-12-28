@@ -18,6 +18,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import logo from "../Images/logo.png";
 import { useNavigate } from "react-router-dom";
+import api from "../Utils/Api";
 const avatars = [
   {
     name: "Utkarsh Singhal",
@@ -29,6 +30,7 @@ export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const toast = useToast();
   const handleEmail = (e) => {
     setEmail(e.target.value);
   };
@@ -42,6 +44,18 @@ export default function Login() {
       email,
       password,
     };
+    try {
+      let res = await axios.post(`${process.env.REACT_API}/login`,obj);
+      toast({
+        title: "Successfully Login.",
+
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+      });
+    } catch (err) {
+      console.log("err", err);
+    }
   };
 
   return (
@@ -58,7 +72,7 @@ export default function Login() {
             lineHeight={1.1}
             fontSize={{ base: "3xl", sm: "4xl", md: "5xl", lg: "6xl" }}
           >
-           Login Page
+            Login Page
           </Heading>
           <Stack direction={"row"} spacing={4} align={"center"}>
             <Image src={logo} width={"200px"} />
