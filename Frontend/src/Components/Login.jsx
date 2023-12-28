@@ -18,7 +18,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import logo from "../Images/logo.png";
 import { useNavigate } from "react-router-dom";
-import api from "../Utils/Api";
+
 const avatars = [
   {
     name: "Utkarsh Singhal",
@@ -45,7 +45,7 @@ export default function Login() {
       password,
     };
     try {
-      let res = await axios.post(`${process.env.REACT_API}/login`,obj);
+      let res = await axios.post(`${process.env.REACT_API}/login`, obj);
       toast({
         title: "Successfully Login.",
 

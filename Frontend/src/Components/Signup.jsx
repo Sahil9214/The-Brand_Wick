@@ -31,6 +31,7 @@ export default function Signup() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isAuth, setIsAuth] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
   const handleClick = async (e) => {
@@ -41,6 +42,7 @@ export default function Signup() {
       phone,
       password,
     };
+    setIsAuth(true);
     try {
       let res = await axios.post(`${process.env.REACT_API}/register`, obj);
       toast({
@@ -54,7 +56,9 @@ export default function Signup() {
       console.log("err");
     }
   };
-
+  if (isAuth) {
+    return navigate("/login");
+  }
   return (
     <Box position={"relative"}>
       <Container
