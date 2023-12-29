@@ -46,7 +46,7 @@ export default function Login() {
       password,
     };
     try {
-      let res = await axios.post(`${process.env.REACT_API}/login`, obj);
+      let res = await axios.post(`https://healthy-vestments-calf.cyclic.app/login`, obj);
       toast({
         title: "Successfully Login.",
 

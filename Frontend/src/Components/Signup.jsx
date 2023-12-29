@@ -13,7 +13,7 @@ import {
   useBreakpointValue,
   Icon,
   Image,
-  useToast
+  useToast,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
 import axios from "axios";
@@ -45,7 +45,10 @@ export default function Signup() {
     };
     setIsAuth(true);
     try {
-      let res = await axios.post(`${process.env.REACT_API}/register`, obj);
+      let res = await axios.post(
+        `https://healthy-vestments-calf.cyclic.app/registerData`,
+        obj
+      );
       toast({
         title: "Signup Successfull",
 
