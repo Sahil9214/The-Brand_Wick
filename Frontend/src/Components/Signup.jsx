@@ -28,7 +28,7 @@ const avatars = [
 
 export default function Signup() {
   const [name, setName] = useState("");
-  const [userName, setUserName] = useState("");
+  const [username, setUserName] = useState("");
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -36,14 +36,15 @@ export default function Signup() {
   const navigate = useNavigate();
   const toast = useToast();
   const handleClick = async (e) => {
+    phone=+phone
     let obj = {
       name,
-      userName,
+      username,
       email,
       phone,
       password,
     };
-    setIsAuth(true);
+ console.log("obj",obj)
     try {
       let res = await axios.post(
         `https://healthy-vestments-calf.cyclic.app/registerData`,
@@ -56,6 +57,7 @@ export default function Signup() {
         duration: 9000,
         isClosable: true,
       });
+      setIsAuth(true);
     } catch (err) {
       console.log("err");
     }
