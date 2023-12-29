@@ -29,14 +29,14 @@ const avatars = [
 export default function Signup() {
   const [name, setName] = useState("");
   const [username, setUserName] = useState("");
-  const [phone, setPhone] = useState("");
+  const [phoney, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isAuth, setIsAuth] = useState(false);
   const navigate = useNavigate();
   const toast = useToast();
   const handleClick = async (e) => {
-    phone=+phone
+    let phone=+phoney
     let obj = {
       name,
       username,
