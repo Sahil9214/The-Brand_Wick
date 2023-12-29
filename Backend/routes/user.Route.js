@@ -9,57 +9,73 @@ require("dotenv").config();
 const userRouter = express.Router();
 
 userRouter.post("/registerData", async (req, res) => {
-  const { username, email, password, name, phone } = req.body;
+  const { name, username, email, password, phonenumber } = req.body;
   console.log("req", req.body);
-  let userExist = await UserModel.findOne({ email });
-  console.log("req", req.body);
-  if (userExist) {
-    return res.status(400).json({
-      msg: "Email already exists, please login or signup with another email",
-      state: true,
-    });
-  }
-  try {
-    bcrypt.hash(password, 5, async (err, security) => {
-      if (err) {
-        console.log(err);
-      } else {
-        const user = new UserModel({
-          username,
-          email,
-          name,
-          phone,
-          password: security,
-        });
 
-        await user.save();
-        res.json(user);
+  try {
+    let userExist = await UserModel.findOne({ email });
+
+    if (userExist) {
+      return res.status(400).json({
+        msg: "Email already exists, please login or signup with another email",
+        state: true,
+      });
+    }
+
+    bcrypt.hash(password, 5, async (err, hash) => {
+      if (err) {
+        return res.status(400).json({ error: err.message });
       }
+
+      const user = new UserModel({
+        name,
+        username,
+        email,
+        phonenumber,
+        password: hash,
+      });
+
+      await user.save();
+      res.json({ msg: "New user registered" });
     });
   } catch (error) {
-    res.send({ message: "error in registering the user" });
+    console.log(error);
+    res.status(500).json({ msg: "Internal server error" });
   }
 });
 
 userRouter.post("/login", async (req, res) => {
   const { email, password } = req.body;
-
-  try {
-    if (user.length > 0) {
-      bcrypt.compare(password, user.password, (err, result) => {
-        if (result) {
-          const token = jwt.sign({ userID: user[0].id }, process.env.key);
-          console.log("token", token);
-          res.send({ messsage: "Login successful", token: token });
-        } else {
-          res.send({ messsage: "Wrong credentials..try again" });
-        }
-      });
-    } else {
-      res.send({ messsage: "credentials are wrong" });
+  console.log(req.body);
+  if (email && password) {
+    try {
+      const user = await UserModel.findOne({ email });
+      if (user) {
+        bcrypt.compare(password, user.password, (err, result) => {
+          if (result) {
+            var token = jwt.sign(
+              { userID: user._id, user: user.firstName },
+              process.env.secret
+            );
+            res.cookie("token", token, { httpOnly: true });
+            res.json({ msg: "Logged In!", token, user: user.firstName });
+          } else {
+            res.status(400).json({ msg: "Wrong Credentials" });
+          }
+        });
+      } else {
+        res.status(400).json({
+          msg: "User does not exist. Please Register first",
+          newuser: true,
+        });
+      }
+    } catch (err) {
+      res.status(400).json({ msg: err.message });
     }
-  } catch (error) {
-    res.send({ messsage: "something went wrong,try again" });
+  } else {
+    res
+      .status(404)
+      .json({ msg: `Please enter - ${!email ? "email" : "password"}` });
   }
 });
 
