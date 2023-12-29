@@ -100,7 +100,7 @@ To register a new account, use the following steps:
 
 ## Deployment
 
-The project is deployed on Vercel. You can access the live version at [Live Demo](<your_vercel_project_url>).
+The project is deployed on Vercel. You can access the live version at [Live Demo](https://the-brand-wick-ten.vercel.app/).
 
 ## Project Structure
 
@@ -116,7 +116,6 @@ List the key features or functionalities provided by your frontend.
 - CSS
 - JavaScript
 - React
-- Tailwind CSS
 - Axios for API communication
 
 ## Folder Structure
@@ -125,7 +124,7 @@ Explain the structure of your React components and other key folders.
 
 ## Styling and Theming
 
-Describe how you handle styling and theming in your project, especially if you use Tailwind CSS.
+Describe how you handle styling and theming in your project, especially if you use Chakra UI.
 
 ## API Integration
 
@@ -142,3 +141,9 @@ Specify the license under which your project is distributed.
 ## Acknowledgments
 
 Acknowledge any libraries, tools, or contributors that you want to credit.
+
+## Backend URL (https://healthy-vestments-calf.cyclic.app/)
+Routes are use :
+login - /login 
+Signup - /registerData
+  
