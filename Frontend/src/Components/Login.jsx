@@ -140,7 +140,7 @@ export default function Login() {
               }}
               onClick={handleClick}
             >
-              Submit
+              Login
             </Button>
           </Box>
           form
